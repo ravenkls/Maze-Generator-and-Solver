@@ -6,7 +6,6 @@ from PIL import Image
 import numpy as np
 import random
 
-
 def generate_maze(rows, columns):
     maze = Image.new('RGB', (2*columns+1, 2*rows+1), 'black')
     pixels = maze.load()
@@ -46,4 +45,3 @@ def generate_maze(rows, columns):
             stack.put(neighbour)
 
     return maze
-
