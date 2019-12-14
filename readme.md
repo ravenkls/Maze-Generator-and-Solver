@@ -6,37 +6,23 @@ utilises a stack data structure and is a depth-first search algorithm.
 
 ### It can be described with following steps
 
-<div style="display: grid; grid-template-columns: 60% 40%; ">
-<div>
-    <ol>
-        <li>Choose the initial cell, mark it as visited and push it to the stack</li>
-        <li>While the stack is not empty
-            <ol>
-                <li>Pop a cell from the stack and make it a current cell</li>
-                <li>If the current cell has any neighbours which have not been visited
-                    <ol>
-                        <li>Push the current cell to the stack</li>
-                        <li>Choose one of the unvisited neighbours</li>
-                        <li>Remove the wall between the current cell and the chosen cell</li>
-                        <li>Mark the chosen cell as visited and push it to the stack</li>
-                    </ol>
-                </li>
-            </ol>
-        </li>
-    </ol>
-</div>
+1. Choose the initial cell, mark it as visited and push it to the stack
+2. While the stack is not empty
+    1. Pop a cell from the stack and make it a current cell
+    2. If the current cell has any neighbours which have not been visited
+        1. Push the current cell to the stack
+        2. Choose one of the unvisited neighbours
+        3. Remove the wall between the current cell and the chosen cell
+        4. Mark the chosen cell as visited and push it to the stack
 
-<div style="text-align: center;">
+### Visualised
+
 <img src="https://i.imgur.com/lK2jY41.gif">
-</div>
-</div>
-
 
 ### Analysis of Algorithm
 This algorithm has an efficiency of O(n^2)
 
 <img src="https://i.imgur.com/cnYmRiC.png" height="300">
-<img src="https://i.imgur.com/dwHmZui.png" height="300" style="padding: 0 40px;">
 
 ## Maze Solver Algorithm
 To solve the mazes, I used [Djikstra's shortest path algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Algorithm), this algorithm utilises a priority queue data structure.
