@@ -1,7 +1,7 @@
 # Maze Creator / Solver
 
 ## Maze Creation Algorithm
-To create the mazes, I used the [recursive backtracker algorithm](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker), this algorithm
+To create the mazes, I used the [backtracker algorithm](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker), this algorithm
 utilises a stack data structure and is a depth-first search algorithm.
 
 ### It can be described with following steps
