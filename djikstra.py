@@ -5,6 +5,7 @@ from typing import List
 
 import numpy as np
 from PIL import Image, ImageDraw
+import time
 
 from maze_analyser import Node, nodes_from_maze
 
@@ -82,10 +83,19 @@ def colour_path(image, path):
     pixels[start_node.coords] = (red_fade[step], blue_fade[step], 0)
 
 
-maze_image = Path('mazes') / '16x16_maze1.png'
+start = time.time()
+
+maze_image = Path('mazes') / '4K_maze.png'
 image = Image.open(maze_image)
+print('Finding all nodes')
 start_node, finish_node, nodes = nodes_from_maze(image)
+print('Running Djikstra\'s Algorithm')
 run_djikstra_algorithm(start_node, nodes)
+print('Getting Path')
 path = get_path_to_node(finish_node)
+print('Done')
 colour_path(image, path)
 image.save('solve_' + maze_image.name)
+
+end = time.time() - start
+print('Time taken:', end)
