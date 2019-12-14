@@ -25,8 +25,8 @@ class PriorityItem:
         return self.priority < other.priority
 
 
-def run_djikstra_algorithm(start_node, nodes):
-    """Executes Djikstra's algorithm on an array of nodes, given a starting node.
+def run_dijkstra_algorithm(start_node, nodes):
+    """Executes Dijkstra's algorithm on an array of nodes, given a starting node.
     All nodes will be updated with a 'distance' value (which signifies the shortest distance from the start node)
     All nodes will be updated with a 'previous' value (which signifies the previous node in the shortest path)"""
 
@@ -85,17 +85,12 @@ def colour_path(image, path):
 
 start = time.time()
 
-maze_image = Path('mazes') / '4K_maze.png'
+maze_image = Path('mazes') / '200x200_maze.png'
 image = Image.open(maze_image)
-print('Finding all nodes')
 start_node, finish_node, nodes = nodes_from_maze(image)
-print('Running Djikstra\'s Algorithm')
-run_djikstra_algorithm(start_node, nodes)
-print('Getting Path')
+run_dijkstra_algorithm(start_node, nodes)
 path = get_path_to_node(finish_node)
-print('Done')
 colour_path(image, path)
 image.save('solve_' + maze_image.name)
-
 end = time.time() - start
 print('Time taken:', end)

@@ -25,7 +25,7 @@ This algorithm has a time efficiency of O(n^2)
 <img src="https://i.imgur.com/cnYmRiC.png" height="300">
 
 ## Maze Solver Algorithm
-To solve the mazes, I used [Djikstra's shortest path algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Algorithm), this algorithm utilises a priority queue data structure.
+To solve the mazes, I used [Dijkstra's shortest path algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Algorithm), this algorithm utilises a priority queue data structure.
 
 ### It can be described with the following steps
 1. Choose a start and end node, all nodes other than start node have a distance of **infinity**
@@ -36,6 +36,6 @@ To solve the mazes, I used [Djikstra's shortest path algorithm](https://en.wikip
 4. Dequeue a node from the queue and start again from step 2
 
 ### Example
-Here is a 500x500 maze generated (Image size is 1001x1001) using the maze generation algorithm as described further above. And it has been solved using the Djikstra's algorithm implemented in this project.
+Here is a 500x500 maze generated (Image size is 1001x1001) using the maze generation algorithm as described further above. And it has been solved using the Dijkstra's algorithm implemented in this project.
 
 <img src="https://i.imgur.com/9UdY6ho.png">
