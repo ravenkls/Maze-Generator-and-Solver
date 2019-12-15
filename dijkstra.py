@@ -94,7 +94,7 @@ def solve_image(file_path) -> None:
     start_node, finish_node, nodes = nodes_from_maze(image)
     run_dijkstra_algorithm(start_node, nodes)
     path = get_path_from_node(finish_node)
-    colour_path(image, path, start_node, finish_node)
+    colour_path(image, path)
     image.save(os.path.join(os.path.dirname(file_path), "solved_%s" % os.path.basename(file_path)))
 
 
