@@ -4,8 +4,6 @@ This file analyses the efficiency of the MAZE GENERATION algorithm.
 
 import time
 import matplotlib.pyplot as plt
-import numpy as np
-
 from maze_generator import generate_maze
 
 if __name__ == "__main__":
