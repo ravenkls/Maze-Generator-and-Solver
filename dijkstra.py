@@ -25,7 +25,7 @@ class PriorityItem:
         return self.priority < other.priority
 
 
-def run_dijkstra_algorithm(start_node, nodes):
+def run_dijkstra_algorithm(start_node, nodes) -> None:
     """Executes Dijkstra's algorithm on an array of nodes, given a starting node.
     All nodes will be updated with a 'distance' value (which signifies the shortest distance from the start node)
     All nodes will be updated with a 'previous' value (which signifies the previous node in the shortest path)"""
@@ -52,8 +52,9 @@ def run_dijkstra_algorithm(start_node, nodes):
                 queue.put(PriorityItem(node.distance, node))
 
 
-def get_path_to_node(node: Node) -> List[Node]:
-    """Returns the list of nodes which lead towards a specific node."""
+def get_path_from_node(node: Node) -> List[Node]:
+    """Returns the list of nodes which lead from a
+    specific node to the start node."""
     path = []
     while node:
         path.append(node)
@@ -61,8 +62,11 @@ def get_path_to_node(node: Node) -> List[Node]:
     return path
 
 
-def colour_path(image, path, start_node, finish_node):
+def colour_path(image, path) -> None:
     """Colours in a path (based on nodes) from red to green."""
+    start_node = path[-1]
+    finish_node = path[0]
+
     pixels = image.load()
 
     red_fade = np.linspace(255, 0, finish_node.distance + 1).astype(int)
@@ -83,12 +87,13 @@ def colour_path(image, path, start_node, finish_node):
     pixels[start_node.coords] = (red_fade[step], blue_fade[step], 0)
 
 
-def solve_image(file_path):
+def solve_image(file_path) -> None:
+    """Solves a maze image file and outputs the solution in the same folder."""
     import os
     image = Image.open(file_path)
     start_node, finish_node, nodes = nodes_from_maze(image)
     run_dijkstra_algorithm(start_node, nodes)
-    path = get_path_to_node(finish_node)
+    path = get_path_from_node(finish_node)
     colour_path(image, path, start_node, finish_node)
     image.save(os.path.join(os.path.dirname(file_path), "solved_%s" % os.path.basename(file_path)))
 
@@ -96,15 +101,10 @@ def solve_image(file_path):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("maze", nargs="?", type=str, default=None)
+    parser.add_argument("maze", nargs="?", type=str, default='./mazes/200x200_maze.png')
     args = parser.parse_args()
-    if args.maze:
-        start = time.time()
-        solve_image(args.maze)
-        end = time.time() - start
-        print('Time taken:', end)
-    else:
-        start = time.time()
-        solve_image("./mazes/200x200_maze.png")
-        end = time.time() - start
-        print('Time taken:', end)
+
+    start = time.time()
+    solve_image(args.maze)
+    end = time.time() - start
+    print('Time taken:', end)
