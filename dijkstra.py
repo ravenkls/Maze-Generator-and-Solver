@@ -61,20 +61,20 @@ def get_path_to_node(node: Node) -> List[Node]:
     return path
 
 
-def colour_path(image, path):
+def colour_path(image, path, start_node, finish_node):
     """Colours in a path (based on nodes) from red to green."""
     pixels = image.load()
 
-    red_fade = np.linspace(255, 0, finish_node.distance+1).astype(int)
-    blue_fade = np.linspace(0, 255, finish_node.distance+1).astype(int)
+    red_fade = np.linspace(255, 0, finish_node.distance + 1).astype(int)
+    blue_fade = np.linspace(0, 255, finish_node.distance + 1).astype(int)
     step = 0
 
     for node1, node2 in zip(path[:-1], path[1:]):
         x1, y1 = node1.coords
         x2, y2 = node2.coords
         distance = node1.distance - node2.distance
-        x_change = np.linspace(x1, x2, distance+1)[:-1]
-        y_change = np.linspace(y1, y2, distance+1)[:-1]
+        x_change = np.linspace(x1, x2, distance + 1)[:-1]
+        y_change = np.linspace(y1, y2, distance + 1)[:-1]
 
         for path_x, path_y in zip(x_change, y_change):
             pixels[path_x, path_y] = (red_fade[step], blue_fade[step], 0)
@@ -83,14 +83,28 @@ def colour_path(image, path):
     pixels[start_node.coords] = (red_fade[step], blue_fade[step], 0)
 
 
-start = time.time()
+def solve_image(file_path):
+    import os
+    image = Image.open(file_path)
+    start_node, finish_node, nodes = nodes_from_maze(image)
+    run_dijkstra_algorithm(start_node, nodes)
+    path = get_path_to_node(finish_node)
+    colour_path(image, path, start_node, finish_node)
+    image.save(os.path.join(os.path.dirname(file_path), "solved_%s" % os.path.basename(file_path)))
 
-maze_image = Path('mazes') / '200x200_maze.png'
-image = Image.open(maze_image)
-start_node, finish_node, nodes = nodes_from_maze(image)
-run_dijkstra_algorithm(start_node, nodes)
-path = get_path_to_node(finish_node)
-colour_path(image, path)
-image.save('solve_' + maze_image.name)
-end = time.time() - start
-print('Time taken:', end)
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("maze", nargs="?", type=str, default=None)
+    args = parser.parse_args()
+    if args.maze:
+        start = time.time()
+        solve_image(args.maze)
+        end = time.time() - start
+        print('Time taken:', end)
+    else:
+        start = time.time()
+        solve_image("./mazes/200x200_maze.png")
+        end = time.time() - start
+        print('Time taken:', end)
