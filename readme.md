@@ -19,11 +19,6 @@ utilises a stack data structure and is a depth-first search algorithm.
 
 <img src="https://i.imgur.com/lK2jY41.gif">
 
-### Analysis of Algorithm
-This algorithm has a time efficiency of O(n^2)
-
-<img src="https://i.imgur.com/cnYmRiC.png" height="300">
-
 ## Maze Solver Algorithm
 To solve the mazes, I used [Dijkstra's shortest path algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Algorithm), this algorithm utilises a priority queue data structure.
 
